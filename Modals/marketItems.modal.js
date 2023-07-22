@@ -13,7 +13,7 @@ const marketItemSchema = mongoose.Schema({
   registrationPlace: { type: String, required: true }, 
   currentPrice: { type: Number, default: 0 }, 
   dealer: { type: mongoose.Schema.Types.ObjectId, ref: 'Dealer' }, 
-  oemSpecs: { type: mongoose.Schema.Types.ObjectId, ref:'OEMItems' }
+  oemItems: { type: mongoose.Schema.Types.ObjectId, ref:'OEMItems' }
 },{versionKey:false});
 
 
