@@ -19,7 +19,7 @@ app.get("/",(req,res)=>{
 
 app.get("/data", async (req, res) => {
     try {
-        const market = await MarketItemModel.find()
+        const market = await MarketItemModel.find().populate('OEMItems')
         res.status(200).send(market)
 
     } catch (err) {

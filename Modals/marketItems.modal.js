@@ -13,10 +13,9 @@ const marketItemSchema = mongoose.Schema({
   registrationPlace: { type: String, required: true }, 
   currentPrice: { type: Number, default: 0 }, 
   dealer: { type: mongoose.Schema.Types.ObjectId, ref: 'Dealer' }, 
-  oemSpecs: { type: mongoose.Schema.Types.ObjectId, }
+  oemSpecs: { type: mongoose.Schema.Types.ObjectId, ref:'OEMItems' }
 },{versionKey:false});
 
-marketItemSchema.index({ title: "text", description: "text" });
 
 const MarketItemModel = mongoose.model('MarketItem', marketItemSchema);
 
