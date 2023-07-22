@@ -17,14 +17,16 @@ app.get("/",(req,res)=>{
     res.status(200).send("Home page")
 })
 
-MarketRouter.get("/",async(req,res)=>{
-    try{
-        const oldCars = await MarketItemModel.find()
-        res.status(200).send(oldCars)
-    }catch(err){
-        console.log({"msg":"Error Occured","error":err})
+app.get("/data", async (req, res) => {
+    try {
+        const market = await MarketItemModel.find()
+        res.status(200).send(market)
+
+    } catch (err) {
+        res.status(400).send({ "err": err.message })
     }
 })
+
 
 app.use("/dealerItem",dealerRouter)
 app.use(auth)

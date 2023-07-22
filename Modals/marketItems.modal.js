@@ -16,6 +16,7 @@ const marketItemSchema = mongoose.Schema({
   oemSpecs: { type: mongoose.Schema.Types.ObjectId, }
 },{versionKey:false});
 
+marketItemSchema.index({ title: "text", description: "text" });
 
 const MarketItemModel = mongoose.model('MarketItem', marketItemSchema);
 

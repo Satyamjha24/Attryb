@@ -54,8 +54,8 @@ MarketRouter.delete("/delete/:id", async (req, res) => {
 MarketRouter.patch("/update/:id", async (req, res) => {
     const ID = req.params.id
     try {
-        let data = await MarketItemModel.findByIdAndUpdate({ _id: ID }, req.body)
-        res.send(data)
+        let data = await MarketItemModel.findByIdAndUpdate({ '_id': ID }, req.body)
+        res.status(400).send(`Data has been updated successfuly`)
     } catch (err) {
         console.log({ "msg": "Error Occured", "error": err })
     }
