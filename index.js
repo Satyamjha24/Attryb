@@ -39,6 +39,7 @@ app.get("/price", async (req, res) => {
 
         }else{
             const market = await MarketItemModel.find()
+            res.status(200).send(market)
         }
 
     } catch (err) {
@@ -49,7 +50,7 @@ app.get("/price", async (req, res) => {
 app.get("/search", async (req, res) => {
     const query = req.query.search
     try {
-        const market = await MarketModel.find({ "title": { "$regex": query, "$options": "i" } })
+        const market = await MarketItemModel.find({ "title": { "$regex": query, "$options": "i" } })
         res.status(200).send(market)
     } catch (err) {
         res.status(400).send({ "err": err.message })
