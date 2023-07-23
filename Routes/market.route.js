@@ -3,32 +3,36 @@ const { MarketItemModel } = require("../Modals/marketItems.modal")
 
 const MarketRouter = express.Router()
 
-MarketRouter.get("/", async (req, res) => {
-    let { search } = req.query;
-    console.log('search:back', search)
+// MarketRouter.get("/", async (req, res) => {
+//     let { search } = req.query;
+//     console.log('search:back', search)
 
-    try {
+//     try {
 
-        const data = search ? await MarketItemModel.find({ "title": { "$regex": search, "$options": "i" } })
-            :
-            await MarketItemModel.find().populate('oemSpecs')
+//         const data = search ? await MarketplaceInventoryModel.find(
+//             { $text: { $search: search } },
+//             { score: { $meta: "textScore" } }
+//             ).sort({ score: { $meta: "textScore" } }).populate('oemItems')
+//             :
+//             await MarketItemModel.find().populate('oemItems')
 
-        res.send(data);
-    } catch (err) {
-        res.send(err.message);
-        console.log('err:', err);
-    }
-});
+//         res.send(data);
+//     } catch (err) {
+//         res.send(err.message);
+//         console.log('err:', err);
+//     }
+// });
 
 // get data
 MarketRouter.get("/dealer", async (req, res) => {
     const ID = req.body.dealer
     try {
         console.log('ID:', ID)
-        const notes = await MarketItemModel.find({ dealer: ID }).populate('dealer').populate('oemSpecs')
-        res.send(notes)
+        const data = await MarketItemModel.find({dealer: ID })
+        res.status(200).send(data)
     } catch (err) {
-        console.log({ "msg": "Error Occured", "error": err })
+        res.status(400).send({'msg':err.message})
+        console.log({ "error": err })
     }
 })
 // post data

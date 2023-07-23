@@ -5,6 +5,7 @@ const auth=(req,res,next)=>{
   if(token){
     const decoded=jwt.verify(token,'cars')
     if(decoded){
+      console.log("decoded:",decoded);
         req.body.dealer=decoded.dealerid
         next()
     }else{
