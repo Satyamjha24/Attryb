@@ -27,6 +27,34 @@ app.get("/data", async (req, res) => {
     }
 })
 
+app.get("/price", async (req, res) => {
+    const order = req.query.price
+    try {
+        if (order == "asc") {
+            const market = await MarketItemModel.find().sort({ "currentPrice": 1 })
+            res.status(200).send(market)
+        }else if(order == "desc"){
+            const market = await MarketItemModel.find().sort({ "currentPrice": -1 })
+            res.status(200).send(market)
+
+        }else{
+            const market = await MarketItemModel.find()
+        }
+
+    } catch (err) {
+        res.status(400).send({ "err": err.message })
+    }
+})
+
+app.get("/search", async (req, res) => {
+    const query = req.query.search
+    try {
+        const market = await MarketModel.find({ "title": { "$regex": query, "$options": "i" } })
+        res.status(200).send(market)
+    } catch (err) {
+        res.status(400).send({ "err": err.message })
+    }
+})
 
 app.use("/dealerItem",dealerRouter)
 app.use(auth)

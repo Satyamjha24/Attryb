@@ -3,25 +3,6 @@ const { MarketItemModel } = require("../Modals/marketItems.modal")
 
 const MarketRouter = express.Router()
 
-// MarketRouter.get("/", async (req, res) => {
-//     let { search } = req.query;
-//     console.log('search:back', search)
-
-//     try {
-
-//         const data = search ? await MarketplaceInventoryModel.find(
-//             { $text: { $search: search } },
-//             { score: { $meta: "textScore" } }
-//             ).sort({ score: { $meta: "textScore" } }).populate('oemItems')
-//             :
-//             await MarketItemModel.find().populate('oemItems')
-
-//         res.send(data);
-//     } catch (err) {
-//         res.send(err.message);
-//         console.log('err:', err);
-//     }
-// });
 
 // get data
 MarketRouter.get("/dealer", async (req, res) => {
